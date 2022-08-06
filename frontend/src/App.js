@@ -13,11 +13,11 @@ function App() {
     <BrowserRouter>
 
       <Header/>
-      <div className='container'>
+      
       <Routes>
           <Route path='/stagiaires' element={<Stagiaires />} />
       </Routes>
-      </div> 
+      
 
     </BrowserRouter>
     </>

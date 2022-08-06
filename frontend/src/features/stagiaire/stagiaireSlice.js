@@ -21,8 +21,9 @@ export const addStagiaire = createAsyncThunk('stagiaire/addStagiaire', async (st
     return response
 })
 
-export const updateStagiaire = createAsyncThunk('stagiaire/updateStagiaire', async(id,stagiaire) =>{
-    const response = await stagiaireService.updateStagiaire(id,stagiaire)
+export const updateStagiaire = createAsyncThunk('stagiaire/updateStagiaire', async(stagiaire) =>{
+    const {_id} = stagiaire;
+    const response = await stagiaireService.updateStagiaire(_id,stagiaire)
     return response
 })
 
@@ -35,7 +36,8 @@ export const stagiaireSlice = createSlice({
     name : 'stagiaire',
     initialState,
     reducers :{
-        reset : (state)=> initialState
+        reset : (state)=> initialState,
+        
     },
     extraReducers : (builder) => {
         builder
@@ -49,8 +51,8 @@ export const stagiaireSlice = createSlice({
                 state.stagiaires.push(action.payload)
             })
             .addCase(updateStagiaire.fulfilled, (state,action)=>{
-                const index = state.stagiaires.findIndex((stagiaire) => stagiaire._id === action.payload._id)
-                state.stagiaires[index]= action.payload
+                const index = state.stagiaires.findIndex(stagiaire => stagiaire._id === action.payload._id)
+                state.stagiaires[index] = action.payload
             })
             .addCase(deleteStagiaire.fulfilled, (state,action)=>{
                 state.stagiaires = state.stagiaires.filter((stagiaire) => stagiaire._id !== action.payload._id)
