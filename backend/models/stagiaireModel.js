@@ -4,7 +4,7 @@ const stagiaireSchema = mongoose.Schema({
     cin : String,
     nom : String,
     prenom : String,
-    sex : String,
+    sexe : String,
     email : String,
     tel : String,
     option : String

@@ -27,7 +27,7 @@ const addStagiaire = async (req,res) => {
 const updateStagiaire = async (req,res) => {
     const stagiaire = req.body;
     const _id = req.params.id;
-    const updatedStagiaire = await Stagiaire.findByIdAndUpdate(id,{...stagiaire,id},{new : true});
+    const updatedStagiaire = await Stagiaire.findByIdAndUpdate(_id,{...stagiaire,_id},{new : true});
     res.json(updatedStagiaire)
 }
 
