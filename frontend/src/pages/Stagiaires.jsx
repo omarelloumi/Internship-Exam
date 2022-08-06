@@ -1,10 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux/es/exports';
-import {getStagiaires,reset} from '../features/stagiaire/stagiaireSlice'
+import {getStagiaires,reset,deleteStagiaire} from '../features/stagiaire/stagiaireSlice'
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import { StagiaireForm } from '../components/StagiaireForm';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+
+
+
+
+
 
 const style = {
   position: 'absolute',
@@ -21,6 +31,7 @@ const style = {
 
 export const Stagiaires = () => {
     const dispatch = useDispatch();
+    const [id, setId] = useState("");
     const {stagiaires } = useSelector((state)=>state.stagiaire)
     let counter = 0;
     const [title,setTitle] = useState("") ;
@@ -46,12 +57,31 @@ export const Stagiaires = () => {
       option : ''
   });
 
+
+
+
+  const [dopen, setDopen] = React.useState(false);
+
+  const handleClickOpen = (id) => {
+    setId(id)
+    setDopen(true);
+  };
+
+  const handleClickClose = () => {
+    setId("")
+    setDopen(false);
+  };
+
+
+
+
+
     useEffect(() => {
         dispatch(getStagiaires());
         return () => {
             dispatch(reset())
           }
-    },[dispatch])
+    },[dispatch,id])
 
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900">
@@ -100,7 +130,7 @@ export const Stagiaires = () => {
               <td className="px-6 py-4 whitespace-nowrap">{stagiaire.tel}</td>
               <td className="px-6 py-4 whitespace-nowrap">{stagiaire.option}</td>
               <td className="px-6 py-4 whitespace-nowrap"><Button variant="outlined" onClick={()=>{setTitle("Modifier") ;handleOpen(stagiaire); }}>Modifier</Button></td>
-              <td className="px-6 py-4 whitespace-nowrap"><Button variant="outlined" color="error" onClick={()=>{}}>Supprimer</Button></td>
+              <td className="px-6 py-4 whitespace-nowrap"><Button variant="outlined" color="error" onClick={()=>{handleClickOpen(stagiaire._id)}}>Supprimer</Button></td>
             </tr>
           )
         })
@@ -140,6 +170,36 @@ export const Stagiaires = () => {
            
         <StagiaireForm stagiaire={form} setStagiaire={setForm} title= {title} close={handleClose}></StagiaireForm></Box>
       </Modal>
+
+
+
+
+
+
+      <Dialog
+        open={dopen}
+        onClose={handleClickClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Vous etes sur de supprimer ce stagiaire ?"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Si vous cliquez "Oui" le stagiaire va être effacé
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Non</Button>
+          <Button onClick={()=>{
+            dispatch(deleteStagiaire(id));
+            handleClickClose () 
+          }} autoFocus>
+            Oui
+          </Button>
+        </DialogActions>
+      </Dialog>
   
   
   
