@@ -1,18 +1,25 @@
 import React from 'react';
 import Header from './components/Header'
-import { BrowserRouter as Router } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
+import { Stagiaires } from './pages/Stagiaires';
 
 function App() {
   return (
     <>
-    <Router>
+    <BrowserRouter>
 
       <Header/>
       <div className='container'>
-        
+      <Routes>
+          <Route path='/stagiaires' element={<Stagiaires />} />
+      </Routes>
       </div> 
 
-    </Router>
+    </BrowserRouter>
     </>
   );
 }

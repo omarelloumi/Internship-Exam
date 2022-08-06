@@ -6,32 +6,32 @@ const initialState = {
     stagiaire :{}
 }
 
-const getStagiaires = createAsyncThunk('stagiaire/getStagiaires',async () => {
+export const getStagiaires = createAsyncThunk('stagiaire/getStagiaires',async () => {
     const response = await stagiaireService.getStagiaires();
     return response
 })
 
-const getStagiaireById = createAsyncThunk('stagiaire/getStagiaireById', async (id) =>{
+export const getStagiaireById = createAsyncThunk('stagiaire/getStagiaireById', async (id) =>{
     const response = await stagiaireService.getStagiaireById(id);
     return response
 })
 
-const addStagiaire = createAsyncThunk('stagiaire/addStagiaire', async (stagiaire) => {
+export const addStagiaire = createAsyncThunk('stagiaire/addStagiaire', async (stagiaire) => {
     const response = await stagiaireService.addStagiaire(stagiaire)
     return response
 })
 
-const updateStagiaire = createAsyncThunk('stagiaire/updateStagiaire', async(id,stagiaire) =>{
+export const updateStagiaire = createAsyncThunk('stagiaire/updateStagiaire', async(id,stagiaire) =>{
     const response = await stagiaireService.updateStagiaire(id,stagiaire)
     return response
 })
 
-const deleteStagiaire = createAsyncThunk('stagiaire/deleteStagiaire',async(id) => {
+export const deleteStagiaire = createAsyncThunk('stagiaire/deleteStagiaire',async(id) => {
     const response = await stagiaireService.deleteStagiaire(id)
     return response
 })
 
-const stagiaireSlice = createSlice({
+export const stagiaireSlice = createSlice({
     name : 'stagiaire',
     initialState,
     reducers :{
