@@ -1,11 +1,19 @@
 import React from 'react';
-
+import Header from './components/Header'
+import { BrowserRouter as Router } from "react-router-dom";
 
 function App() {
   return (
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+    <>
+    <Router>
+
+      <Header/>
+      <div className='container'>
+        
+      </div> 
+
+    </Router>
+    </>
   );
 }
 

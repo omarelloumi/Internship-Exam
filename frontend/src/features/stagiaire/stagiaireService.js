@@ -24,6 +24,7 @@ const updateStagiaire = async (id , stagiaire) => {
 
 const deleteStagiaire = async (id) =>{
     const response = await axios.delete(API+id)
+    return response.data
 }
 
 const stagiaireService = {
