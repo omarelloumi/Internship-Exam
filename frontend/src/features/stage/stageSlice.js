@@ -5,7 +5,7 @@ const initialState = {
     stages : []
 }
 
-export const affectStage = createAsyncThunk('Stage/affect' , async (stage) => {
+export const affectStage = createAsyncThunk('stage/affect' , async (stage) => {
     const response = await stageService.affectStage(stage)
     return response
 })
@@ -25,4 +25,4 @@ export const stageSlice = createSlice({
 })
 
 export const { reset } = stageSlice.actions
-export default stageSlice.reducers
+export default stageSlice.reducer

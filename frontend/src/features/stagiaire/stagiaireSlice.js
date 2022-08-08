@@ -2,8 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import stagiaireService from './stagiaireService';
 
 const initialState = {
-    stagiaires : [],
-    stagiaire :{}
+    stagiaires : []
 }
 
 export const getStagiaires = createAsyncThunk('stagiaire/getStagiaires',async () => {
@@ -43,9 +42,6 @@ export const stagiaireSlice = createSlice({
         builder
             .addCase(getStagiaires.fulfilled, (state,action) => {
                 state.stagiaires = action.payload
-            })
-            .addCase(getStagiaireById.fulfilled, (state,action)=>{
-                state.stagiaire = action.payload
             })
             .addCase(addStagiaire.fulfilled, (state,action)=>{
                 state.stagiaires.push(action.payload)

@@ -10,6 +10,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import StageForm from '../components/StageForm';
 
 
 
@@ -74,6 +75,18 @@ export const Stagiaires = () => {
 
 
 
+  const [sopen, setSopen] = React.useState(false);
+  const handleStageOpen = (form) => {setForm(form);setSopen(true);}
+  const handleStageClose = () => {setForm({
+    cin : '',
+    nom : '',
+    prenom : '',
+    sexe : '',
+    email : '',
+    tel : '',
+    option : ''
+});setSopen(false);}
+
 
 
     useEffect(() => {
@@ -110,7 +123,8 @@ export const Stagiaires = () => {
         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Sexe</th>
         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tel</th>
-        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Option</th>     
+        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Option</th>   
+        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Affecter</th>    
         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Modifier</th>
         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Supprimer</th>         
       </tr>
@@ -129,6 +143,7 @@ export const Stagiaires = () => {
               <td className="px-6 py-4 whitespace-nowrap">{stagiaire.email}</td>
               <td className="px-6 py-4 whitespace-nowrap">{stagiaire.tel}</td>
               <td className="px-6 py-4 whitespace-nowrap">{stagiaire.option}</td>
+              <td className="px-6 py-4 whitespace-nowrap"><Button variant="contained" onClick={()=>{ handleStageOpen(stagiaire) }}>Affecter</Button></td>
               <td className="px-6 py-4 whitespace-nowrap"><Button variant="outlined" onClick={()=>{setTitle("Modifier") ;handleOpen(stagiaire); }}>Modifier</Button></td>
               <td className="px-6 py-4 whitespace-nowrap"><Button variant="outlined" color="error" onClick={()=>{handleClickOpen(stagiaire._id)}}>Supprimer</Button></td>
             </tr>
@@ -174,7 +189,7 @@ export const Stagiaires = () => {
 
 
 
-
+{ sopen ? <StageForm open={sopen} handleClose={handleStageClose} form={form}></StageForm> : null }
 
       <Dialog
         open={dopen}
